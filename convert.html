@@ -19,20 +19,20 @@ button{font-size:18px;padding:5px 16px;border:2px solid #00;}
 </style>
 </head>
 <body>
-
-<div class='row'>◆10進法から　　　<button class='btnDec' onclick='fromDec()'>変換</button></div><input id='dec' class='dec' inputmode='decimal' onfocus='this.select()'> °</div>
-<div class='row'>◆60進法（分）から <button class='btnDM' onclick='fromDM()'>変換</button></div>
-<input id='dmDeg' class='dmdeg' inputmode='numeric' onfocus='this.select()'> ° <input id='dmMin' class='dmmin' inputmode='decimal' onfocus='this.select()'> ′</div>
-<div class='row'>◆60進法（秒）から  <button class='btnDMS' onclick='fromDMS()'>変換</button></div>
-<input id='dmsDeg' class='dmsdeg' inputmode='numeric' onfocus='this.select()'> ° <input id='dmsMin' class='dmsmin' inputmode='numeric' onfocus='this.select()'> ′ <input id='dmsSec' class='dmssec' inputmode='decimal' onfocus='this.select()'> ″</div>
+<div class='row'>◆10進法から　　 　</div><input id='dec' class='dec' inputmode='decimal' onfocus='this.select()'> °　<button class='btnDec' onclick='fromDec()'>変換</button></div>
+<div class='row'>◆60進法（分）から </div>
+<input id='dmDeg' class='dmdeg' inputmode='numeric' onfocus='this.select()'> ° <input id='dmMin' class='dmmin' inputmode='decimal' onfocus='this.select()'> ′　<button class='btnDM' onclick='fromDM()'>変換</button></div>
+<div class='row'>◆60進法（秒）から </div>
+<input id='dmsDeg' class='dmsdeg' inputmode='numeric' onfocus='this.select()'> ° <input id='dmsMin' class='dmsmin' inputmode='numeric' onfocus='this.select()'> ′ <input id='dmsSec' class='dmssec' inputmode='decimal' onfocus='this.select()'> ″　<button class='btnDMS' onclick='fromDMS()'>変換</button></div>
 <br><br><button onclick='resetAll()'>リセット（履歴も消去されます）</button>
 <br>履歴<div id='history'></div>
 <script>
 let logs=[];
 function now(){const d=new Date();return d.toLocaleTimeString('ja-JP',{hour12:false});}
 function z(s){return String(s).replace(/[０-９]/g,c=>'０１２３４５６７８９'.indexOf(c)).replace(/．/g,'.');}
-function addHistory(t){logs.push(t);if(logs.length>20)logs.shift();history.textContent=logs.join('\n');}
-function fill(dec){let deg=Math.floor(dec);let mt=(dec-deg)*60;let mi=Math.floor(mt);let sec=(mt-mi)*60;decBox.value=dec.toFixed(6);dmDeg.value=deg;dmMin.value=mt.toFixed(3);dmsDeg.value=deg;dmsMin.value=mi;dmsSec.value=sec.toFixed(2);return{deg,mt,mi,sec};}
+function addHistory(t){logs.push(t);if(logs.length>20)logs.shift();history.textContent=logs.join('
+');}
+function fill(dec){let deg=Math.floor(dec);let mt=(dec-deg)60;let mi=Math.floor(mt);let sec=(mt-mi)60;decBox.value=dec.toFixed(6);dmDeg.value=deg;dmMin.value=mt.toFixed(3);dmsDeg.value=deg;dmsMin.value=mi;dmsSec.value=sec.toFixed(2);return{deg,mt,mi,sec};}
 const history=document.getElementById('history');
 const decBox=document.getElementById('dec'),dmDeg=document.getElementById('dmDeg'),dmMin=document.getElementById('dmMin'),dmsDeg=document.getElementById('dmsDeg'),dmsMin=document.getElementById('dmsMin'),dmsSec=document.getElementById('dmsSec');
 function fromDec(){let dec=parseFloat(z(decBox.value));if(isNaN(dec))return;let r=fill(dec);addHistory('◆'+now()+'変換　'+dec.toFixed(6)+'°→　'+r.deg+'°'+r.mt.toFixed(3)+'′　/　'+r.deg+'°'+r.mi+'′'+r.sec.toFixed(2)+'″');}
