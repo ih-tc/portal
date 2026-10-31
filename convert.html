@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>座標変換</title>
+<title>変換</title>
 <style>
 body{font-family:sans-serif;max-width:900px;margin:auto;padding:15px}
 .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:8px 0}
@@ -19,10 +19,10 @@ button{font-size:18px;padding:5px 16px;border:2px solid #00;}
 </style>
 </head>
 <body>
-<div class='row'>◆10進法から　　 　</div><input id='dec' class='dec' inputmode='decimal' onfocus='this.select()'> °　<button class='btnDec' onclick='fromDec()'>変換</button></div>
-<div class='row'>◆60進法（分）から </div>
+<div class='row'>◆10進法から　　 　<input id='dec' class='dec' inputmode='decimal' onfocus='this.select()'> °　<button class='btnDec' onclick='fromDec()'>変換</button></div>
+<div class='row'>◆60進法（分）から 
 <input id='dmDeg' class='dmdeg' inputmode='numeric' onfocus='this.select()'> ° <input id='dmMin' class='dmmin' inputmode='decimal' onfocus='this.select()'> ′　<button class='btnDM' onclick='fromDM()'>変換</button></div>
-<div class='row'>◆60進法（秒）から </div>
+<div class='row'>◆60進法（秒）から 
 <input id='dmsDeg' class='dmsdeg' inputmode='numeric' onfocus='this.select()'> ° <input id='dmsMin' class='dmsmin' inputmode='numeric' onfocus='this.select()'> ′ <input id='dmsSec' class='dmssec' inputmode='decimal' onfocus='this.select()'> ″　<button class='btnDMS' onclick='fromDMS()'>変換</button></div>
 <br><br><button onclick='resetAll()'>リセット（履歴も消去されます）</button>
 <br>履歴<div id='history'></div>
