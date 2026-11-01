@@ -49,7 +49,7 @@ function fromDec(){
 let dec=parseFloat(zenToHan(document.getElementById('dec').value));
 if(isNaN(dec)) return;
 let r=fill(dec);
-'【'+ addHistory(now()+'】'+dec.toFixed(6)+'° → '+r.deg+'°'+r.mt.toFixed(3)+'′ / '+r.deg+'°'+r.mi+'′'+r.sec.toFixed(2)+'″');
+addHistory(now()+'変換　'+dec.toFixed(6)+'° → '+r.deg+'°'+r.mt.toFixed(3)+'′ / '+r.deg+'°'+r.mi+'′'+r.sec.toFixed(2)+'″');
 }
 function fromDM(){
 let d=parseFloat(zenToHan(document.getElementById('dmDeg').value))||0;
@@ -57,7 +57,7 @@ let m=parseFloat(zenToHan(document.getElementById('dmMin').value))||0;
 let input=d+'°'+m+'′';
 let dec=d+m/60;
 let r=fill(dec);
-+'【'+ addHistory(now()+'】'+input+' → '+dec.toFixed(6)+'° / '+r.deg+'°'+r.mi+'′'+r.sec.toFixed(2)+'″');
+addHistory(now()+'変換　'+input+' → '+dec.toFixed(6)+'° / '+r.deg+'°'+r.mi+'′'+r.sec.toFixed(2)+'″');
 }
 function fromDMS(){
 let d=parseFloat(zenToHan(document.getElementById('dmsDeg').value))||0;
@@ -66,7 +66,7 @@ let s=parseFloat(zenToHan(document.getElementById('dmsSec').value))||0;
 let input=d+'°'+m+'′'+s+'″';
 let dec=d+m/60+s/3600;
 let r=fill(dec);
-'【'+ addHistory(now()+'】'+input+' → '+dec.toFixed(6)+'° / '+r.deg+'°'+r.mt.toFixed(3)+'′');
+addHistory(now()+'変換　'+input+' → '+dec.toFixed(6)+'° / '+r.deg+'°'+r.mt.toFixed(3)+'′');
 }
 function resetAll(){
 ['dec','dmDeg','dmMin','dmsDeg','dmsMin','dmsSec'].forEach(id=>document.getElementById(id).value='');
