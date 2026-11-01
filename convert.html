@@ -22,9 +22,9 @@ button{font-size:18px;padding:5px 16px;border:2px solid #000;border-radius:6px;f
 </head>
 <body>
 
-◆10進法から</br><div class='row'><input id='dec' class='dec' inputmode='decimal' onfocus='this.select()'>°<button class='btnDec' onclick='fromDec()'>変換</button></div>
-◆60進法（分）から</br><div class='row'><input id='dmDeg' class='dmdeg' inputmode='numeric' onfocus='this.select()'>° <input id='dmMin' class='dmmin' inputmode='decimal' onfocus='this.select()'>′ <button class='btnDM' onclick='fromDM()'>変換</button></div>
-◆60進法（秒）から</br><div class='row'><input id='dmsDeg' class='dmsdeg' inputmode='numeric' onfocus='this.select()'>° <input id='dmsMin' class='dmsmin' inputmode='numeric' onfocus='this.select()'>′ <input id='dmsSec' class='dmssec' inputmode='decimal' onfocus='this.select()'>″ <button class='btnDMS' onclick='fromDMS()'>変換</button></div>
+◆10進度（DD）から</br><div class='row'><input id='dec' class='dec' inputmode='decimal' onfocus='this.select()'>°<button class='btnDec' onclick='fromDec()'>変換</button></div>
+◆度分（DM）から</br><div class='row'><input id='dmDeg' class='dmdeg' inputmode='numeric' onfocus='this.select()'>° <input id='dmMin' class='dmmin' inputmode='decimal' onfocus='this.select()'>′ <button class='btnDM' onclick='fromDM()'>変換</button></div>
+◆度分秒（DMS）から</br><div class='row'><input id='dmsDeg' class='dmsdeg' inputmode='numeric' onfocus='this.select()'>° <input id='dmsMin' class='dmsmin' inputmode='numeric' onfocus='this.select()'>′ <input id='dmsSec' class='dmssec' inputmode='decimal' onfocus='this.select()'>″ <button class='btnDMS' onclick='fromDMS()'>変換</button></div>
 <p><button onclick='resetAll()'>ﾘｾｯﾄ（履歴も消去されます）</button></p>
 履歴(20件まで)
 <div id='history'></div>
