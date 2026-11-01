@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<style>
+body{font-family:sans-serif;max-width:900px;margin:auto;padding:15px}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:10px 0}
+.dec{background:#fff;width:140px;font-size:20px;padding:8px}
+.dmdeg{background:#fff3b0;width:2em;font-size:20px;padding:8px}
+.dmmin{background:#fff3b0;width:3.5em;font-size:20px;padding:8px}
+.dmsdeg{background:#cfe8ff;width:2em;font-size:20px;padding:8px}
+.dmsmin{background:#cfe8ff;width:1.5em;font-size:20px;padding:8px}
+.dmssec{background:#cfe8ff;width:3.5em;font-size:20px;padding:8px}
+button{font-size:18px;padding:5px 16px;border:2px solid #000;border-radius:6px;font-weight:bold}
+.btnDec{background:#fff}
+.btnDM{background:#fff3b0}
+.btnDMS{background:#cfe8ff}
+#history{border:1px solid #ccc;padding:10px;height:350px;overflow:auto;white-space:pre-wrap}
+</style>
+</head>
+<body>
+
+◆10進法から</br><div class='row'><input id='dec' class='dec' inputmode='decimal' onfocus='this.select()'>°<button class='btnDec' onclick='fromDec()'>変換</button></div>
+◆60進法（分）から</br><div class='row'><input id='dmDeg' class='dmdeg' inputmode='numeric' onfocus='this.select()'>° <input id='dmMin' class='dmmin' inputmode='decimal' onfocus='this.select()'>′ <button class='btnDM' onclick='fromDM()'>変換</button></div>
+◆60進法（秒）から</br><div class='row'><input id='dmsDeg' class='dmsdeg' inputmode='numeric' onfocus='this.select()'>° <input id='dmsMin' class='dmsmin' inputmode='numeric' onfocus='this.select()'>′ <input id='dmsSec' class='dmssec' inputmode='decimal' onfocus='this.select()'>″ <button class='btnDMS' onclick='fromDMS()'>変換</button></div>
+<p><button onclick='resetAll()'>ﾘｾｯﾄ（履歴も消去されます）</button></p>
+履歴(20件まで)
+<div id='history'></div>
+<script>
+let logs=[];
+function now(){const d=new Date();return d.toTimeString().substring(0,8);}
+function zenToHan(s){return String(s).replace(/[０-９]/g,c=>String.fromCharCode(c.charCodeAt(0)-65248)).replace(/．/g,'.');}
+function addHistory(t){logs.push(t);if(logs.length>20)logs.shift();document.getElementById('history').textContent=logs.join('\n');}
+function fill(dec){
+ let deg=Math.floor(dec);
+ let mt=(dec-deg)*60;
+ let mi=Math.floor(mt);
+ let sec=(mt-mi)*60;
+ document.getElementById('dec').value=dec.toFixed(6);
+ document.getElementById('dmDeg').value=deg;
+ document.getElementById('dmMin').value=mt.toFixed(3);
+ document.getElementById('dmsDeg').value=deg;
+ document.getElementById('dmsMin').value=mi;
+ document.getElementById('dmsSec').value=sec.toFixed(2);
+ return {deg,mt,mi,sec};
+}
+function fromDec(){
+ let dec=parseFloat(zenToHan(document.getElementById('dec').value));
+ if(isNaN(dec)) return;
+ let r=fill(dec);
+addHistory(now()+'…'+dec.toFixed(6)+'° → '+r.deg+'°'+r.mt.toFixed(3)+'′ / '+r.deg+'°'+r.mi+'′'+r.sec.toFixed(2)+'″');
+}
+function fromDM(){
+ let d=parseFloat(zenToHan(document.getElementById('dmDeg').value))||0;
+ let m=parseFloat(zenToHan(document.getElementById('dmMin').value))||0;
+ let input=d+'°'+m+'′';
+ let dec=d+m/60;
+ let r=fill(dec);
+addHistory(now()+'…'+input+' → '+dec.toFixed(6)+'° / '+r.deg+'°'+r.mi+'′'+r.sec.toFixed(2)+'″');
+}
+function fromDMS(){
+ let d=parseFloat(zenToHan(document.getElementById('dmsDeg').value))||0;
+ let m=parseFloat(zenToHan(document.getElementById('dmsMin').value))||0;
+ let s=parseFloat(zenToHan(document.getElementById('dmsSec').value))||0;
+ let input=d+'°'+m+'′'+s+'″';
+ let dec=d+m/60+s/3600;
+ let r=fill(dec);
+addHistory(now()+'…'+input+' → '+dec.toFixed(6)+'° / '+r.deg+'°'+r.mt.toFixed(3)+'′');
+}
+function resetAll(){
+ ['dec','dmDeg','dmMin','dmsDeg','dmsMin','dmsSec'].forEach(id=>document.getElementById(id).value='');
+ logs=[];
+ document.getElementById('history').textContent='';
+}
+</script>
+</body>
+</html>
